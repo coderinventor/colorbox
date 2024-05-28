@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color box</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #121212;
+            color: #FFFFFF;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        #colorBox {
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #FFFFFF;
+            background-color: #1E90FF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0A74DA;
+        }
+       .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #1C1D22;
+      color: #ffffff;
+      padding: 10px;
+      text-align: center;
+       }
+    </style>
+</head>
+<body>
+    <h1>أدخل كود اللون</h1>
+    <input type="text" id="colorInput" placeholder="#FFFFFF">
+    <div id="colorBox"></div>
+    <button onclick="downloadImage()">تنزيل الصورة</button>
+    <div class="footer"><a href="https://coderinventor.github.io/social/" style="color: #ff0000; text-decoration: none;">coder inventor</a>
+    تم صنع الصفحة من قبل 
+  </div>
+
+    <script>
+        const colorInput = document.getElementById('colorInput');
+        const colorBox = document.getElementById('colorBox');
+
+        colorInput.addEventListener('input', () => {
+            const color = colorInput.value;
+            colorBox.style.backgroundColor = color;
+        });
+
+        function downloadImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = colorBox.style.backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'colorBox.png';
+            link.click();
+        }
+    </script>
+</body>
+</html>
